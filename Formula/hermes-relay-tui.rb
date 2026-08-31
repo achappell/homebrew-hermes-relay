@@ -8,7 +8,7 @@ class HermesRelayTui < Formula
 
   # Pin the public source tag and revision for reproducible installs.
   url "https://github.com/achappell/hermes-relay-tui.git", using: :git,
-      tag: "v0.3.1", revision: "3ced323da674d52c130b39d95e88c6f10b536d6b"
+      tag: "v0.4.0", revision: "4aafc43a8a775dbc1f474a686d74bc3171e7280d"
   head "https://github.com/achappell/hermes-relay-tui.git", branch: "main"
 
   depends_on "portaudio"
