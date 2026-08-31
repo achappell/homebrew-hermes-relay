@@ -1,12 +1,12 @@
-# Hermes Streaming Homebrew Tap
+# Hermes Relay Homebrew Tap
 
-Private Homebrew tap for the [Hermes Streaming TUI](https://github.com/achappell/hermes-streaming-tui).
+Private Homebrew tap for the [Hermes Relay TUI](https://github.com/achappell/hermes-relay-tui).
 
 ```bash
-brew tap achappell/hermes-streaming
-brew install achappell/hermes-streaming/hermes-streaming-tui
+brew tap achappell/hermes-relay
+brew install achappell/hermes-relay/hermes-relay-tui
 ```
 
 The formula installs Python 3.14, PortAudio, the TUI's Python dependencies,
-and the `hermes-streaming-tui` command. Access to the private source repository
+and the `hermes-relay` command. Access to the private source repository
 is required.

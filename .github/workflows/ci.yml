@@ -18,4 +18,4 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Check formula syntax and style
-        run: brew style Formula/hermes-streaming-tui.rb
+        run: brew style Formula/hermes-relay-tui.rb
