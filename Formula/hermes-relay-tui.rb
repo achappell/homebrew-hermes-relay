@@ -7,9 +7,9 @@ class HermesRelayTui < Formula
   homepage "https://github.com/achappell/hermes-relay-tui"
 
   # Install from the checksummed release sdist, not a git clone.
-  url "https://github.com/achappell/hermes-relay-tui/releases/download/v0.6.0/hermes_relay_tui-0.6.0.tar.gz"
-  sha256 "6d44be0acbac4d21feb311d20e7965d6c302fa4cce2fe8bf305b55d18a1b4740"
-  version "0.6.0"
+  url "https://github.com/achappell/hermes-relay-tui/releases/download/v0.6.1/hermes_relay_tui-0.6.1.tar.gz"
+  sha256 "d70ba5ba0e876cf9edb797c26812453214e3e8d283c13b2bfba6ca58e42e7321"
+  version "0.6.1"
   head "https://github.com/achappell/hermes-relay-tui.git", branch: "main"
 
   depends_on "portaudio"
@@ -37,7 +37,28 @@ class HermesRelayTui < Formula
     end
   end
 
+  # Homebrew rewrites Mach-O install names across the keg after the install
+  # block runs. PyAV and its FFmpeg dylibs ship pre-signed, and rewriting
+  # their load commands invalidates that signature, after which macOS
+  # SIGKILLs any process that loads them - which killed local speech-to-text
+  # with no traceback. Re-sign ad-hoc, once relocation has finished.
+  def post_install
+    return unless OS.mac?
+
+    # FNM_DOTMATCH is required: the affected dylibs live in hidden
+    # ".dylibs" directories, which ** skips by default.
+    Dir.glob(libexec / "venv/**/*.{dylib,so}", File::FNM_DOTMATCH).each do |macho|
+      next if quiet_system("codesign", "--verify", macho)
+
+      system "codesign", "--force", "--sign", "-", macho
+    end
+  end
+
   test do
     assert_match "Hermes streaming TUI", shell_output("#{bin}/hermes-relay --help")
+
+    # Guards the signature breakage above: both imports SIGKILL when the
+    # bundled dylibs are relinked without being re-signed.
+    system libexec / "venv/bin/python", "-c", "import av, faster_whisper"
   end
 end
