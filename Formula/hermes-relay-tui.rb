@@ -7,9 +7,9 @@ class HermesRelayTui < Formula
   homepage "https://github.com/achappell/hermes-relay-tui"
 
   # Install from the checksummed release sdist, not a git clone.
-  url "https://github.com/achappell/hermes-relay-tui/releases/download/v0.11.0/hermes_relay_tui-0.11.0.tar.gz"
-  version "0.11.0"
-  sha256 "54493c1b1257b26fea2e4d358143f28774af872bc079a98e5152c7c35a0e05ab"
+  url "https://github.com/achappell/hermes-relay-tui/releases/download/v0.12.0/hermes_relay_tui-0.12.0.tar.gz"
+  version "0.12.0"
+  sha256 "4972c890305aee6e05ce62fe13ad8779cbaae24a8f7c8e8da8718783269593a6"
   head "https://github.com/achappell/hermes-relay-tui.git", branch: "main"
 
   depends_on "portaudio"
